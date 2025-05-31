@@ -37,6 +37,7 @@ const Navbar = () => {
       navigate("/products");
     }
   }, [searchQuery]);
+
   return (
     <nav className="flex items-center justify-between px-6 md:px-16 lg:px-24 xl:px-32 py-4 border-b border-gray-300 bg-white relative transition-all">
       <NavLink to="/" onClick={() => setOpen(false)}>
@@ -104,6 +105,8 @@ const Navbar = () => {
           </div>
         )}
       </div>
+
+      {/* Mobile menu toggle */}
       <div className="flex items-center gap-6 sm:hidden">
         <div
           onClick={() => navigate("/cart")}
@@ -118,12 +121,7 @@ const Navbar = () => {
             {getCartCount()}
           </button>
         </div>
-        <button
-          onClick={() => (open ? setOpen(false) : setOpen(true))}
-          aria-label="Menu"
-          className=""
-        >
-          {/* Menu Icon SVG */}
+        <button onClick={() => setOpen(!open)} aria-label="Menu">
           <img src={assets.menu_icon} alt="menu" />
         </button>
       </div>
@@ -155,12 +153,18 @@ const Navbar = () => {
                 setOpen(false);
                 setShowUserLogin(true);
               }}
-              className="cursor-pointer px-6 py-2 mt-2 bg-primary hover:bg-primary transition text-white rounded-full text-sm"
+              className="cursor-pointer px-6 py-2 mt-2 bg-indigo-500 hover:bg-indigo-600 transition text-white rounded-full text-sm"
             >
               Login
             </button>
           ) : (
-            <button className="cursor-pointer px-6 py-2 mt-2 bg-primary hover:bg-primary transition text-white rounded-full text-sm">
+            <button
+              onClick={() => {
+                setOpen(false);
+                logOut();
+              }}
+              className="cursor-pointer px-6 py-2 mt-2 bg-indigo-500 hover:bg-indigo-600 transition text-white rounded-full text-sm"
+            >
               Logout
             </button>
           )}
