@@ -50,6 +50,15 @@ const Navbar = () => {
         <NavLink to="/products">All Products</NavLink>
         <NavLink to="/">Contact</NavLink>
 
+        {user && (
+          <button
+            onClick={() => navigate("/seller")}
+            className="text-sm px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-full transition"
+          >
+            Seller Dashboard
+          </button>
+        )}
+
         <div className="hidden lg:flex items-center text-sm gap-2 border border-gray-300 px-3 rounded-full">
           <input
             onChange={(e) => setSearchQuery(e.target.value)}
@@ -106,7 +115,7 @@ const Navbar = () => {
         )}
       </div>
 
-      {/* Mobile menu toggle */}
+      {/* Mobile Menu Toggle */}
       <div className="flex items-center gap-6 sm:hidden">
         <div
           onClick={() => navigate("/cart")}
@@ -128,11 +137,7 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       {open && (
-        <div
-          className={`${
-            open ? "flex" : "hidden"
-          } absolute top-[60px] left-0 w-full bg-white shadow-md py-4 flex-col items-start gap-2 px-5 text-sm md:hidden z-50`}
-        >
+        <div className="absolute top-[60px] left-0 w-full bg-white shadow-md py-4 flex-col items-start gap-2 px-5 text-sm md:hidden z-50 flex">
           <NavLink to="/" onClick={() => setOpen(false)}>
             Home
           </NavLink>
@@ -140,9 +145,20 @@ const Navbar = () => {
             All Product
           </NavLink>
           {user && (
-            <NavLink to="/products" onClick={() => setOpen(false)}>
-              My Orders
-            </NavLink>
+            <>
+              <NavLink to="/products" onClick={() => setOpen(false)}>
+                My Orders
+              </NavLink>
+              <button
+                onClick={() => {
+                  setOpen(false);
+                  navigate("/seller");
+                }}
+                className="text-left w-full px-2 py-2 hover:bg-gray-100 rounded"
+              >
+                Seller Dashboard
+              </button>
+            </>
           )}
           <NavLink to="/" onClick={() => setOpen(false)}>
             Contact
